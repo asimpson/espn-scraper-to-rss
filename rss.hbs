@@ -1,0 +1,21 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Zach Lowe on ESPN</title>
+    <link>http://espn.com</link>
+    <description>Feed for Zach Lowe's ESPN posts</description>
+    <lastBuildDate>{{date}}</lastBuildDate>
+    <language>en-us</language>
+
+    {{#each rss}}
+      <item>
+        <title>{{title}}</title>
+        <link>{{link}}</link>
+        <guid>{{link}}</guid>
+        <pubDate>{{date}}</pubDate>
+        <description>
+          <![CDATA[ {{description}} ]]>
+        </description>
+      </item>
+    {{/each}}
+  </channel>
+</rss>

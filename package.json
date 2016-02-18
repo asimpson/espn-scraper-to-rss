@@ -1,0 +1,30 @@
+{
+  "name": "lowe-rss",
+  "version": "1.0.0",
+  "description": "RSS Feed for Zach Lowe's columns on ESPN",
+  "main": "dist/check.js",
+  "scripts": {
+    "start": "node dist/check.js",
+    "prestart": "babel src/check.js -o dist/check.js && babel src/db.js -o dist/db.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "sourceRoot": "./src"
+  },
+  "author": "Adam Simpson",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-preset-es2015": "^6.5.0",
+    "cheerio": "^0.20.0",
+    "consolidate": "^0.14.0",
+    "express": "^4.13.4",
+    "handlebars": "^4.0.5",
+    "lodash": "^4.5.0",
+    "request": "^2.69.0",
+    "sqlite3": "^3.1.1"
+  }
+}
