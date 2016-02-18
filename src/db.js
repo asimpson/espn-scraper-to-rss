@@ -6,12 +6,12 @@ const dbFile = path.join(__dirname, '../LOWE');
 const save = (article) => {
   const db = new sql.Database(dbFile);
 
-  db.run("INSERT INTO articles VALUES($id, $title, $date, $description, $url)", {
+  db.run("INSERT INTO articles VALUES($id, $date, $title, $url, $description)", {
     $id: article.id,
-    $title: article.title,
     $date: article.date,
-    $description: article.description,
-    $url: article.url
+    $title: article.title,
+    $url: article.url,
+    $description: article.description
   }, function(err) {
     if (err != null) {
       console.log('sqlite error: ', err);

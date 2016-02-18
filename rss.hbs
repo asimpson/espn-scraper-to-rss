@@ -3,14 +3,14 @@
     <title>Zach Lowe on ESPN</title>
     <link>http://espn.com</link>
     <description>Feed for Zach Lowe's ESPN posts</description>
-    <lastBuildDate>{{date}}</lastBuildDate>
+    <lastBuildDate>{{rows.0.date}}</lastBuildDate>
     <language>en-us</language>
 
-    {{#each rss}}
+    {{#each rows}}
       <item>
         <title>{{title}}</title>
-        <link>{{link}}</link>
-        <guid>{{link}}</guid>
+        <link>{{url}}</link>
+        <guid>{{url}}</guid>
         <pubDate>{{date}}</pubDate>
         <description>
           <![CDATA[ {{description}} ]]>

@@ -1,4 +1,5 @@
 import request from "request";
+import moment from "moment";
 import cheerio from "cheerio";
 import { check } from "./db";
 
@@ -11,10 +12,11 @@ const parseWithCheerio = (html) => {
     const author = $(x).find(".author").text();
 
     if (author === "Zach Lowe") {
+      const href = $(x).find(".realStory").attr("href");
       article['id'] = $(x).attr("data-id");
-      article['url'] = $(x).find(".realStory").attr("href");
+      article['url'] = `http://espn.com${href}`;
       article['title'] = $(x).find(".realStory").text().split(':')[1].trim();
-      getDateAndDesc(`http://espn.com${article.url}`);
+      getDateAndDesc(article.url);
     }
   })
 }
@@ -24,7 +26,9 @@ const getDateAndDesc = (story) => {
     if (!error && response.statusCode == 200) {
       const $ = cheerio.load(body);
 
-      article['date'] = $('.article-meta .timestamp').first().attr('data-date');
+      const date = $('.article-meta .timestamp').first().attr('data-date');
+      const formattedDate = moment(date).format('ddd, DD MMM YYYY HH:mm:ss ZZ');
+      article['date'] = formattedDate;
       article['description'] = $('meta[name=description]').attr('content');
       check(article);
     }
