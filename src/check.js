@@ -2,7 +2,7 @@ import request from "request";
 import moment from "moment";
 import cheerio from "cheerio";
 import { check } from "./db";
-
+const userAgent = 'SimpsonBot/1.0 (https://adamsimpson.net + please add RSS feeds for writers! :wave:)';
 let article = {};
 
 const parseWithCheerio = (html) => {
@@ -22,7 +22,13 @@ const parseWithCheerio = (html) => {
 }
 
 const getDateAndDesc = (story) => {
-  request(story, (error, response, body) => {
+  const options = {
+    url: story,
+    headers: {
+      'User-Agent': userAgent
+    }
+  };
+  request(options, (error, response, body) => {
     if (!error && response.statusCode == 200) {
       const $ = cheerio.load(body);
 
@@ -35,7 +41,13 @@ const getDateAndDesc = (story) => {
   });
 }
 
-request('http://espn.com', (error, response, body) => {
+const options = {
+  url: 'http://espn.com',
+  headers: {
+    'User-Agent': userAgent
+  }
+};
+request(options, (error, response, body) => {
   if (!error && response.statusCode == 200) {
     parseWithCheerio(body)  
   }
