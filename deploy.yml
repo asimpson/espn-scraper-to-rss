@@ -39,7 +39,7 @@
         chdir: "{{ app_path }}"
 
     - name: set up scrape in cron
-      cron: name="nba cron" minute="0" job="/usr/bin/node /home/adam/apps/lowe/dist/check.js"
+      cron: name="lowe espn scraper" special_time="hourly" job="/usr/bin/node /home/adam/apps/lowe/dist/check.js"
 
     - name: start with pm2
       shell: pm2 startOrRestart pm2.json
