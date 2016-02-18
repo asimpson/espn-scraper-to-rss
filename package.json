@@ -5,7 +5,7 @@
   "main": "dist/check.js",
   "scripts": {
     "start": "node ./bin/www",
-    "prestart": "babel src/check.js -o dist/check.js && babel src/db.js -o dist/db.js && babel src/server.js -o server.js",
+    "compile": "babel src/check.js -o dist/check.js && babel src/db.js -o dist/db.js && babel src/server.js -o server.js",
     "check": "node dist/check.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

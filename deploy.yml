@@ -1,0 +1,47 @@
+---
+- hosts: chunk
+
+  vars:
+    app_path: apps/lowe
+    repo_url: git@bitbucket.org:a_simpson/lowe-feed.git
+
+  tasks:
+    - name: create app dir if it doesn't exist
+      file: path={{ app_path }}
+            state=directory
+
+    - name: update from git
+      git: repo={{ repo_url }} 
+           dest={{ app_path }} 
+           force=true
+           depth=1
+
+    - name: install sqlite3
+      become: true
+      become_user: root
+      apt: update_cache=yes cache_valid_time=3600
+      apt: name=sqlite3 state=present
+
+    - name: install libsqlite3-dev
+      become: true
+      become_user: root
+      apt: update_cache=yes cache_valid_time=3600
+      apt: name=libsqlite3-dev state=present
+
+    - name: install deps
+      shell: npm install
+      args:
+        chdir: "{{ app_path }}"
+
+    - name: compile
+      shell: npm run compile
+      args:
+        chdir: "{{ app_path }}"
+
+    - name: set up scrape in cron
+      cron: name="nba cron" minute="0" job="/usr/bin/node /home/adam/apps/lowe/dist/check.js"
+
+    - name: start with pm2
+      shell: pm2 startOrRestart pm2.json
+      args:
+        chdir: "{{ app_path }}"

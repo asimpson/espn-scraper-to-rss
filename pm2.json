@@ -1,0 +1,10 @@
+{
+  "name": "lowe",
+  "cwd": "/home/adam/apps/lowe",
+  "script": "bin/www",
+  "merge_logs"  : true,
+  "log-date-format" : "YYYY-MM-DD HH:mm Z",
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
