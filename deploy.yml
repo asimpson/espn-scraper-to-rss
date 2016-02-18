@@ -13,7 +13,6 @@
     - name: update from git
       git: repo={{ repo_url }} 
            dest={{ app_path }} 
-           force=true
            depth=1
 
     - name: install sqlite3
